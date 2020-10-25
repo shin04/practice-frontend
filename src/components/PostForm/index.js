@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from 'antd';
 
-const PostForm = () => {
-    const [newPost, setNewPost] = useState();
+const PostForm = ({ closemodal }) => {
+    const [newPost, setNewPost] = useState({ Title: "", Content: "" });
+
     const titleChange = (e) => {
         const newpost = {
             ...newPost,
@@ -20,24 +21,27 @@ const PostForm = () => {
 
     const onFinish = () => {
         setNewPost();
+        closemodal();
     }
     const onFinishFailed = (err) => {
         console.log(err)
     }
 
     async function postData() {
-        await fetch("/posts", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-                newPost
-            )
-        })
-            .then((res) => {
+        if (newPost.Title !== "" && newPost.Content !== "") {
+            await fetch("/posts", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(
+                    newPost
+                )
             })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then((res) => {
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
     }
 
     return (

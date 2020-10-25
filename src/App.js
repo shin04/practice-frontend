@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "./components/DataTable/index"
-import PostForm from "./components/PostForm/index"
+import FormModal from "./components/FormModal";
 
 const App = () => {
   const [hasError, setErrors] = useState(false);
@@ -26,7 +26,8 @@ const App = () => {
     <div>
       {isDataShown ? <DataTable data={data} />
         : null}
-      <PostForm />
+      <FormModal />
+
     </div>
   );
 };
