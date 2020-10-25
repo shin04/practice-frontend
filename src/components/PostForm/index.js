@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 
 const PostForm = ({ closemodal }) => {
     const [newPost, setNewPost] = useState({ Title: "", Content: "" });
+
     const titleChange = (e) => {
         const newpost = {
             ...newPost,
